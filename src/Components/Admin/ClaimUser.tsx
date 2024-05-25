@@ -7,9 +7,11 @@ import {
 import Spinner from '../Spinner/Spinner';
 import { useEffect, useState } from 'react';
 import { Button, Card, Col, Input, Modal, Row, Select, message } from 'antd';
+import { useRouter } from 'next/navigation';
 const { Option } = Select;
 
 const ClaimUser = ({ userId }: { userId: number }) => {
+	const router = useRouter();
 	const [teams, setTeams] = useState<any[]>([]);
 	const [open, setOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
@@ -43,7 +45,6 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 				team: data?.team_member?.name,
 				leader: data.team_member?.leader?.name,
 				leaderPhone: data.team_member?.leader?.phone,
-				balance: data?.Balance,
 			});
 		} else if (data?.address) {
 			setAddresses(data?.address);
@@ -89,6 +90,7 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 		});
 		if (result?.data?.success) {
 			message.success('success');
+			router.push(`/admin/user_management/${userId}`);
 		} else {
 			message.error(result?.data?.message);
 		}

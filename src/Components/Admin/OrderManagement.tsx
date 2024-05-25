@@ -8,6 +8,8 @@ import { useDebounced } from '@/redux/hooks';
 import {
 	Button,
 	Card,
+	DatePicker,
+	DatePickerProps,
 	Flex,
 	Input,
 	Modal,
@@ -18,6 +20,7 @@ import {
 	message,
 } from 'antd';
 import { SizeType } from 'antd/es/config-provider/SizeContext';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 
 interface DataType {
@@ -40,6 +43,11 @@ const OrderManagement = () => {
 	const [confirmData, setConfirmData] = useState<any>('');
 	const query: Record<string, any> = {};
 	const [status, setStatus] = useState<any>('pending');
+	const defaultValue = dayjs(Date.now());
+	const todayDate = defaultValue.format();
+	const formatDate = todayDate.split('T')[0];
+	const [orderDate, setOrderDate] = useState<any>(formatDate);
+
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [deliverOrder] = useDeliverOrderMutation();
 	const [confirmLoading, setConfirmLoading] = useState(false);
@@ -47,9 +55,11 @@ const OrderManagement = () => {
 	const handleSizeChange = (e: RadioChangeEvent) => {
 		setStatus(e.target.value);
 	};
+
 	const handleDeliverOrder = async () => {
 		setConfirmLoading(true);
 		const result: any = await deliverOrder(confirmData.id);
+		console.log(result);
 		setConfirmLoading(false);
 		if (result.data.success) {
 			message.success('Order delivered successfully ');
@@ -66,10 +76,12 @@ const OrderManagement = () => {
 		searchQuery: searchTerm,
 		delay: 1000,
 	});
+
 	if (!!debouncedTerm) {
 		query['search'] = searchTerm;
 	}
 	query['status'] = status;
+	query['date'] = orderDate;
 
 	const { data: result, isLoading } = useGetTeamOrdersQuery({ ...query });
 	const data = result?.result;
@@ -107,32 +119,37 @@ const OrderManagement = () => {
 			dataIndex: 'leaderPhoneNumber',
 		},
 		{
-			render: (data) => (
-				<div>
-					<Button
-						onClick={() => {
-							setConfirmDeliver(true);
-							setConfirmData({
-								...confirmData,
-								id: data?.team_id,
-								team_name: data?.team_name,
-								address: data?.address,
-							});
-						}}
-						style={{ marginRight: '10px' }}
-					>
-						Deliver
-					</Button>
-					<Button
-						onClick={() => {
-							setOrderList(data.orderList);
-							setOpen(true);
-						}}
-					>
-						User order list
-					</Button>
-				</div>
-			),
+			render: (data) => {
+				return (
+					<div>
+						<Button
+							disabled={
+								formatDate == data?.delivery_date.split('T')[0] ? false : true
+							}
+							onClick={() => {
+								setConfirmDeliver(true);
+								setConfirmData({
+									...confirmData,
+									id: data?.team_id,
+									team_name: data?.team_name,
+									address: data?.address,
+								});
+							}}
+							style={{ marginRight: '10px' }}
+						>
+							Deliver
+						</Button>
+						<Button
+							onClick={() => {
+								setOrderList(data.orderList);
+								setOpen(true);
+							}}
+						>
+							User order list
+						</Button>
+					</div>
+				);
+			},
 		},
 	];
 	const mobileColumns: TableColumnsType<DataType> = [
@@ -176,6 +193,7 @@ const OrderManagement = () => {
 			},
 		},
 	];
+
 	const handleOk = async () => {
 		setOpen(false);
 	};
@@ -184,6 +202,11 @@ const OrderManagement = () => {
 		setOpen(false);
 		setConfirmDeliver(false);
 	};
+
+	const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+		setOrderDate(date);
+	};
+
 	return (
 		<Card
 			title={
@@ -231,6 +254,7 @@ const OrderManagement = () => {
 						setSearchTerm(e.target.value);
 					}}
 				/>
+				<DatePicker onChange={onChange} defaultValue={defaultValue} />
 			</Flex>
 			<div style={{ marginTop: '10px' }}>
 				<Radio.Group value={status} onChange={handleSizeChange}>

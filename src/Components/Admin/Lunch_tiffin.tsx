@@ -1,75 +1,113 @@
 'use client';
 
-import { Button, Card, Flex, Select, Tooltip } from 'antd';
+import {
+	Button,
+	Card,
+	DatePicker,
+	DatePickerProps,
+	Flex,
+	Select,
+	Table,
+	TableColumnsType,
+	Tooltip,
+} from 'antd';
 import dayjs from 'dayjs';
 import { Input } from 'antd';
-const { Search } = Input;
-import LunchTiffinUI from '../AdminUI/LunchTiffinUI';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { useState } from 'react';
+import { useDebounced } from '@/redux/hooks';
+import { useGetTeamOrdersQuery } from '@/redux/api/adminApi';
 
 const Lunch_tiffin = () => {
-	// const localTime = dayjs().format('HH')
-	const [receiverType, setReceiverType] = useState('team');
+	const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1000;
+	const isMobile = screenSize < 1000;
+	const defaultValue = dayjs(Date.now());
+	const todayDate = defaultValue.format();
+	const formatDate = todayDate.split('T')[0];
+	const query: Record<string, any> = {};
+	const [orderDate, setOrderDate] = useState<any>(formatDate);
 
-	const handleChange = (value: string) => {
-		setReceiverType(value);
-	};
-	const dummyInfo = [
+	const [searchTerm, setSearchTerm] = useState<string>('');
+	const debouncedTerm = useDebounced({
+		searchQuery: searchTerm,
+		delay: 1000,
+	});
+
+	if (!!debouncedTerm) {
+		query['search'] = searchTerm;
+	}
+	query['status'] = status;
+	query['date'] = orderDate;
+
+	const { data: result, isLoading } = useGetTeamOrdersQuery({ ...query });
+	const data = result?.orders;
+	const columns: TableColumnsType<any> = [
 		{
-			address: 'baximco',
-			order: 15,
+			title: <h3>Delivery Date</h3>,
+			render: (data) => {
+				return <p>{data?.user?.name}</p>;
+			},
 		},
 		{
-			address: 'basundora',
-			order: 12,
+			title: <h3>User Phone</h3>,
+			render: (data) => {
+				return <p>{data?.user?.phone}</p>;
+			},
 		},
 		{
-			address: 'asian paint',
-			order: 10,
+			title: <h3>Status</h3>,
+			dataIndex: 'status',
+		},
+		{
+			title: <h3>Delivery Date</h3>,
+			render: (data) => {
+				return <p>{data?.team?.address?.address}</p>;
+			},
+		},
+		{
+			title: <h3>Delivery Date</h3>,
+			render: (data) => {
+				console.log(data);
+				return <p>{data?.delivery_date.split('T')[0]}</p>;
+			},
 		},
 	];
+	const mobileColumns: TableColumnsType<any> = [
+		{
+			title: 'Order Details',
+			render: (data: any) => {
+				return (
+					<div>
+						<h4>User name: {data?.user?.name}</h4>
+						<p>User Phone : {data?.user?.phone}</p>
+						<p>Status: {data?.status}</p>
+						<p>Address : {data?.team?.address?.address}</p>
+						<p>Delivery Date: {data?.delivery_date.split('T')[0]}</p>
+					</div>
+				);
+			},
+		},
+	];
+	const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+		setOrderDate(date);
+	};
 	return (
 		<div>
-			<Flex justify="space-between" style={{ marginBottom: '15px' }}>
-				<Select
-					defaultValue={'team'}
-					style={{ width: 120 }}
-					onChange={handleChange}
-					options={[
-						{ value: 'team', label: 'Team' },
-						{ value: 'person', label: 'Person' },
-					]}
+			<Flex gap={10} style={{ margin: '15px 0' }}>
+				<Input
+					placeholder="Search a team"
+					style={{ maxWidth: '350px' }}
+					onChange={(e) => {
+						setSearchTerm(e.target.value);
+					}}
 				/>
-				<Tooltip
-					title={
-						<div>
-							{dummyInfo.map((info) => (
-								<Card>
-									<h4>Address: {info.address}</h4>
-									<h4>Pending Orders : {info.order}</h4>
-								</Card>
-							))}
-						</div>
-					}
-					trigger="click"
-				>
-					<Button>
-						More Info <InfoCircleOutlined />
-					</Button>
-				</Tooltip>
+				<DatePicker onChange={onChange} defaultValue={defaultValue} />
 			</Flex>
-			<div>
-				<Search
-					style={{ marginBottom: '15px' }}
-					placeholder="input search text"
-					enterButton="Search"
-					size="large"
-					loading
-				/>
-			</div>
-			<div>
-				<LunchTiffinUI receiverType={receiverType} />
+			<div style={{ marginTop: '15px' }}>
+				{isMobile ? (
+					<Table columns={mobileColumns} dataSource={data} />
+				) : (
+					<Table columns={columns} dataSource={data} />
+				)}
 			</div>
 		</div>
 	);

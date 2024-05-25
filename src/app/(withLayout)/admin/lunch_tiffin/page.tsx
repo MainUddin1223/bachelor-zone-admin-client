@@ -5,7 +5,7 @@ import React from 'react';
 const Tiffin = () => {
 	return (
 		<div>
-			<Card>
+			<Card title={<h2 style={{ textAlign: 'center' }}>Order list</h2>}>
 				<Lunch_tiffin />
 			</Card>
 		</div>

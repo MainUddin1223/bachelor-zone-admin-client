@@ -11,7 +11,7 @@ import { USER_ROLE } from './role';
 export const sidebarItems = (role: string) => {
 	const defaultSidebarItems: MenuProps['items'] = [
 		{
-			label: <Link href={`/${role}/lunch_tiffin`}>Lunch</Link>,
+			label: <Link href={`/${role}/lunch_tiffin`}>Orders</Link>,
 			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
 			key: `/${role}/lunch_tiffin`,
 			style: { border: '1px solid var(--primary-color)' },
@@ -68,12 +68,7 @@ export const sidebarItems = (role: string) => {
 		// 	key: `/${role}/dinner`,
 		// 	style: { border: '1px solid var(--primary-color)' },
 		// },
-		{
-			label: <Link href={`/${role}/cost_management`}>Cost Management</Link>,
-			icon: <TableOutlined style={{ fontSize: '21px' }} />,
-			key: `/${role}/cost_management`,
-			style: { border: '1px solid var(--primary-color)' },
-		},
+
 		{
 			label: <Link href={`/${role}/user_management`}>User Management</Link>,
 			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
@@ -102,6 +97,12 @@ export const sidebarItems = (role: string) => {
 			label: <Link href={`/${role}/team_management`}>Team Management</Link>,
 			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
 			key: `/${role}/team_management`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: <Link href={`/${role}/cost_management`}>Cost Management</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/cost_management`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
 	];
