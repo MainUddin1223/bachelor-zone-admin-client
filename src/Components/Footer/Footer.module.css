@@ -1,0 +1,44 @@
+.container {
+	background-color: var(--accent-color);
+	color: white;
+}
+.footer_container {
+	width: 80%;
+	margin: 0 auto;
+	padding: 15px 0;
+}
+.info_container {
+	padding: 10px 0;
+	line-height: 25px;
+}
+.icon_container {
+	padding: 10px 0;
+	display: flex;
+	gap: 10px;
+}
+.icon {
+	font-size: 25px;
+	cursor: pointer;
+}
+.copyright_container {
+	padding-top: 15px;
+}
+.privacy_container {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 10px;
+}
+/* Smartphone */
+@media (max-width: 576px) {
+	.footer_container {
+		width: 95%;
+	}
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+	/* CSS rules for screens wider than 1200px (e.g., large desktops) */
+	.footer_container {
+		width: 1200px;
+	}
+}

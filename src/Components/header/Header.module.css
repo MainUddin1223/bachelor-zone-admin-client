@@ -1,0 +1,57 @@
+.container {
+	background-color: var(--secondary-color);
+	position: sticky;
+	top: 0;
+	z-index: 99;
+}
+.header_container {
+	width: 80%;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+.text_logo {
+	font-size: 2rem;
+	cursor: pointer;
+}
+.login_container {
+	display: flex;
+	gap: 10px;
+}
+.login_button {
+	color: var(--primary-text-color);
+	font-weight: bold;
+}
+
+/* Smartphone */
+@media (max-width: 576px) {
+	.header_container {
+		width: 95%;
+	}
+	.text_logo {
+		font-size: 18px;
+	}
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 767px) {
+	.header_container {
+		width: 95%;
+	}
+}
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+	/* CSS rules for screens between 577px and 992px wide (e.g., tablets) */
+}
+
+/* Small laptop/desktop */
+@media (min-width: 992px) and (max-width: 1199px) {
+	/* CSS rules for screens between 993px and 1200px wide (e.g., small laptops/desktops) */
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+	/* CSS rules for screens wider than 1200px (e.g., large desktops) */
+	.header_container {
+		width: 1200px;
+	}
+}

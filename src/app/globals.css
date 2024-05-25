@@ -1,0 +1,39 @@
+:root {
+	--primary-color: #3498db;
+	--secondary-color: rgb(222, 205, 205);
+	--accent-color: rgb(67, 65, 65);
+	--primary-text-color: #000000;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	overflow-x: hidden;
+}
+
+/* Smartphone */
+@media (max-width: 576px) {
+	/* CSS rules for screens 576px wide or narrower (e.g., smartphones) */
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 767px) {
+	/* CSS rules for screens between 577px and 992px wide (e.g., tablets) */
+}
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+	/* CSS rules for screens between 577px and 992px wide (e.g., tablets) */
+}
+
+/* Small laptop/desktop */
+@media (min-width: 992px) and (max-width: 1199px) {
+	/* CSS rules for screens between 993px and 1200px wide (e.g., small laptops/desktops) */
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+	/* CSS rules for screens wider than 1200px (e.g., large desktops) */
+}

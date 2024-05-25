@@ -1,0 +1,60 @@
+.container {
+	min-height: 80vh;
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.container h2 {
+	text-align: center;
+}
+.login_card {
+	position: relative;
+	width: 500px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.login_input_container {
+	margin: 15px 0;
+}
+.input_container {
+	margin: 5px 0;
+}
+.input_container p {
+	margin: 5px 0;
+}
+.login_btn {
+	margin: 0 auto;
+	display: block;
+}
+
+/* Smartphone */
+@media (max-width: 576px) {
+	.container {
+		width: 95%;
+	}
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 767px) {
+	.container {
+		width: 95%;
+	}
+}
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+	/* CSS rules for screens between 577px and 992px wide (e.g., tablets) */
+}
+
+/* Small laptop/desktop */
+@media (min-width: 992px) and (max-width: 1199px) {
+	/* CSS rules for screens between 993px and 1200px wide (e.g., small laptops/desktops) */
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+	/* CSS rules for screens wider than 1200px (e.g., large desktops) */
+	.container {
+		width: 1200px;
+	}
+}
