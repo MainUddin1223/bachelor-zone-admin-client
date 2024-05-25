@@ -117,13 +117,11 @@ const ChangeTeamUI = ({ id }: { id: number }) => {
 			render: (data: any) => {
 				return (
 					<div>
-						<h3>Name : {data?.name}</h3>
-						<h3>Phone : {data?.phone}</h3>
-						<h3>Current Team : {data?.teams?.address?.address}</h3>
-						<h3>Address : {data?.teams?.name}</h3>
-						<h3>Balance : {data?.UserInfo?.Balance}</h3>
-						<h3>Team Leader : {data?.teams?.leader?.name}</h3>
-						<h3>Leader phone : {data?.teams?.leader?.phone}</h3>
+						<h3>Team Name : {data?.name}</h3>
+						<h3>Address : {data?.address?.address}</h3>
+						<h3>Team Leader : {data?.leader?.name}</h3>
+						<h3>Team Member : {data?.member}</h3>
+						<h3>Leader phone : {data?.leader?.phone}</h3>
 
 						<div>
 							<Button onClick={() => showModal(data)}>Select Team</Button>
