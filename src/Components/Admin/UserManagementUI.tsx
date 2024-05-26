@@ -39,6 +39,7 @@ const UserManagementUI = () => {
 		query['search'] = searchTerm;
 	}
 	query['status'] = status;
+	query['page'] = page;
 
 	const { data, isLoading } = useGetUsersQuery({ ...query });
 	const result = data?.result;

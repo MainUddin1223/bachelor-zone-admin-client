@@ -1,15 +1,33 @@
 'use client';
-import { Button, Card, Col, Input, Row } from 'antd';
+import { Button, Card, Col, Input, Modal, Row, message } from 'antd';
 import { useState } from 'react';
 import ExpensesList from '../AdminUI/ExpensesList';
 import Styles from '../AdminCSS/CostManagement.module.css';
+import { useAddExpenseMutation } from '@/redux/api/adminApi';
 
 const CostManagement = () => {
+	const [totalExpenses, setTotalExpense] = useState(0);
+	const [addExpense] = useAddExpenseMutation();
 	const [newExpenses, setNewExpenses] = useState({
-		productName: '',
-		productQuantity: '',
-		price: 0,
+		product_name: '',
+		quantity: '',
+		amount: 0,
 	});
+
+	const [open, setOpen] = useState(false);
+	const [confirmLoading, setConfirmLoading] = useState(false);
+	const handleOk = async () => {
+		setConfirmLoading(true);
+		const result: any = await addExpense(newExpenses);
+		if (result?.data?.success) {
+			message.success(result?.data?.message);
+		} else {
+			message.error('Failed to add expenses');
+		}
+		setOpen(false);
+		setConfirmLoading(false);
+		setNewExpenses({ product_name: '', quantity: '', amount: 0 });
+	};
 	return (
 		<Card
 			title={
@@ -18,15 +36,20 @@ const CostManagement = () => {
 				</h1>
 			}
 		>
+			<Modal
+				title="Are you sure to add the cost"
+				open={open}
+				onOk={handleOk}
+				confirmLoading={confirmLoading}
+				onCancel={() => setOpen(false)}
+			>
+				<h3>Product Name : {newExpenses?.product_name}</h3>
+				<h3>Product Quantity : {newExpenses?.quantity}</h3>
+				<h3>Amount : {newExpenses?.amount}</h3>
+			</Modal>
 			<Row gutter={[15, 15]}>
 				<Col xs={24} sm={8}>
-					<Card title={<h5>Today's Expenses</h5>}>1000 TK</Card>
-				</Col>
-				<Col xs={24} sm={8}>
-					<Card title={<h5>Last 7 Days Expenses</h5>}>5000 TK</Card>
-				</Col>
-				<Col xs={24} sm={8}>
-					<Card title={<h5>Last 30 Days Expenses</h5>}>10000 TK</Card>
+					<Card title={<h5>Total Expenses</h5>}>{totalExpenses} TK</Card>
 				</Col>
 			</Row>
 			<div className={Styles.product_input_container}>
@@ -36,10 +59,11 @@ const CostManagement = () => {
 							<p>Product Name</p>
 							<Input
 								placeholder="Product name"
+								value={newExpenses.product_name}
 								onChange={(event) => {
 									setNewExpenses({
 										...newExpenses,
-										productName: event.target.value,
+										product_name: event.target.value,
 									});
 								}}
 							/>
@@ -49,11 +73,12 @@ const CostManagement = () => {
 								<div className={Styles.product_input_container}>
 									<p>Product Quantity</p>
 									<Input
+										value={newExpenses.quantity}
 										placeholder="Product quantity"
 										onChange={(event) => {
 											setNewExpenses({
 												...newExpenses,
-												productQuantity: event.target.value,
+												quantity: event.target.value,
 											});
 										}}
 									/>
@@ -64,23 +89,24 @@ const CostManagement = () => {
 									<p>Product Price</p>
 									<Input
 										placeholder="Product price"
+										value={newExpenses.amount}
 										type="number"
 										onChange={(event) => {
 											setNewExpenses({
 												...newExpenses,
-												price: Number(event.target.value),
+												amount: Number(event.target.value),
 											});
 										}}
 									/>
 								</div>
 							</Col>
 						</Row>
-						<Button onClick={() => console.log(newExpenses)}>Submit</Button>
+						<Button onClick={() => setOpen(true)}>Submit</Button>
 					</div>
 				</Card>
 			</div>
 			<Card title={<h2>List of Expenses</h2>}>
-				<ExpensesList />
+				<ExpensesList setTotalExpense={setTotalExpense} />
 			</Card>
 		</Card>
 	);

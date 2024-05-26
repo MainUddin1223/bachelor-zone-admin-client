@@ -58,7 +58,7 @@ const Lunch_tiffin = () => {
 			dataIndex: 'status',
 		},
 		{
-			title: <h3>Delivery Date</h3>,
+			title: <h3>Address</h3>,
 			render: (data) => {
 				return <p>{data?.team?.address?.address}</p>;
 			},
@@ -66,7 +66,6 @@ const Lunch_tiffin = () => {
 		{
 			title: <h3>Delivery Date</h3>,
 			render: (data) => {
-				console.log(data);
 				return <p>{data?.delivery_date.split('T')[0]}</p>;
 			},
 		},

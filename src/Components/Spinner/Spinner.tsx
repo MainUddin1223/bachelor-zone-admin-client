@@ -1,10 +1,16 @@
 import { Spin } from 'antd';
-import Styles from './Spinner.module.css';
 
 const Spinner = () => {
 	return (
-		<div className={Styles.container}>
-			<Spin className={Styles.spinner} size="large" />
+		<div
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: '100vh',
+			}}
+		>
+			<Spin size="large" />
 		</div>
 	);
 };

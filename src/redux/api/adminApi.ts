@@ -137,6 +137,22 @@ const adminApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['admin'],
 		}),
+		addExpense: build.mutation({
+			query: (data) => ({
+				url: `${adminUrl}/expense`,
+				method: 'POST',
+				data,
+			}),
+			invalidatesTags: ['admin'],
+		}),
+		getExpenses: build.query({
+			query: (data) => ({
+				url: `${adminUrl}/expense`,
+				method: 'GET',
+				params: data,
+			}),
+			providesTags: ['admin'],
+		}),
 	}),
 });
 
@@ -158,4 +174,6 @@ export const {
 	useGetUnclaimedUserQuery,
 	useClaimUserMutation,
 	useGetAdminStaticsQuery,
+	useAddExpenseMutation,
+	useGetExpensesQuery,
 } = adminApi;
