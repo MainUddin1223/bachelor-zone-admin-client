@@ -12,7 +12,13 @@ interface DataType {
 	amount: number;
 }
 
-const ExpensesList = ({ setTotalExpense }: { setTotalExpense: any }) => {
+const ExpensesList = ({
+	setTotalExpense,
+	setTotalEarning,
+}: {
+	setTotalExpense: any;
+	setTotalEarning: any;
+}) => {
 	const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1000;
 	const isMobile = screenSize < 768;
 	const query: Record<string, any> = {};
@@ -66,7 +72,8 @@ const ExpensesList = ({ setTotalExpense }: { setTotalExpense: any }) => {
 		total: meta?.total,
 		onChange: onPaginationChange,
 	};
-	setTotalExpense(result?.totalExpenses);
+	setTotalExpense(result?.totalExpensesOfTheMonth);
+	setTotalEarning(result?.totalEarningOfTheMonth);
 	return (
 		<div>
 			{isMobile ? (

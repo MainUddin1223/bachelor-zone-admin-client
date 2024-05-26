@@ -7,6 +7,7 @@ import { useAddExpenseMutation } from '@/redux/api/adminApi';
 
 const CostManagement = () => {
 	const [totalExpenses, setTotalExpense] = useState(0);
+	const [totalEarning, setTotalEarning] = useState(0);
 	const [addExpense] = useAddExpenseMutation();
 	const [newExpenses, setNewExpenses] = useState({
 		product_name: '',
@@ -49,7 +50,14 @@ const CostManagement = () => {
 			</Modal>
 			<Row gutter={[15, 15]}>
 				<Col xs={24} sm={8}>
-					<Card title={<h5>Total Expenses</h5>}>{totalExpenses} TK</Card>
+					<Card title={<h5>List of Earning of this month</h5>}>
+						<h5>{totalEarning} TK</h5>
+					</Card>
+				</Col>
+				<Col xs={24} sm={8}>
+					<Card title={<h5>List of Expenses of this month</h5>}>
+						<h5>{totalExpenses} TK</h5>
+					</Card>
 				</Col>
 			</Row>
 			<div className={Styles.product_input_container}>
@@ -105,8 +113,11 @@ const CostManagement = () => {
 					</div>
 				</Card>
 			</div>
-			<Card title={<h2>List of Expenses</h2>}>
-				<ExpensesList setTotalExpense={setTotalExpense} />
+			<Card title={<h2>List of Expenses of this month</h2>}>
+				<ExpensesList
+					setTotalExpense={setTotalExpense}
+					setTotalEarning={setTotalEarning}
+				/>
 			</Card>
 		</Card>
 	);
