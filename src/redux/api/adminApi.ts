@@ -98,6 +98,13 @@ const adminApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['admin'],
 		}),
+		getAdminStatics: build.query({
+			query: () => ({
+				url: `${adminUrl}/statics`,
+				method: 'GET',
+			}),
+			providesTags: ['admin'],
+		}),
 		changeTeam: build.mutation({
 			query: (data) => ({
 				url: `${adminUrl}/change-team`,
@@ -150,4 +157,5 @@ export const {
 	useRefundBalanceMutation,
 	useGetUnclaimedUserQuery,
 	useClaimUserMutation,
+	useGetAdminStaticsQuery,
 } = adminApi;

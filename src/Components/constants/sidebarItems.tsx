@@ -105,6 +105,12 @@ export const sidebarItems = (role: string) => {
 			key: `/${role}/cost_management`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
+		{
+			label: <Link href={`/${role}/delivery-men`}>Delivery Men</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/delivery-men`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
 	];
 
 	if (role === USER_ROLE.ADMIN) return adminSidebarItems;

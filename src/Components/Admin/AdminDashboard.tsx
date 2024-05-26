@@ -1,9 +1,13 @@
+'use client';
+import { useGetAdminStaticsQuery } from '@/redux/api/adminApi';
 import { Card, Col, Row } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
 
 const Dashboard = () => {
 	const today = dayjs(Date.now()).format('DD-MM-YYYY');
+	const { data, isLoading } = useGetAdminStaticsQuery(undefined);
+	console.log(data);
 	return (
 		<Card
 			title={
@@ -49,6 +53,21 @@ const Dashboard = () => {
 					</Col>
 					<Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
 						<Card title={<h3>Dew Boxes</h3>}>
+							<h3>18</h3>
+						</Card>
+					</Col>
+					<Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
+						<Card title={<h3>Total remaining Customer Balance</h3>}>
+							<h3>18</h3>
+						</Card>
+					</Col>
+					<Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
+						<Card title={<h3>Total Balance</h3>}>
+							<h3>18</h3>
+						</Card>
+					</Col>
+					<Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
+						<Card title={<h3>Total service & Tiffin box Balance</h3>}>
 							<h3>18</h3>
 						</Card>
 					</Col>
