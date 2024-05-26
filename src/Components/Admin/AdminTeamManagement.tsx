@@ -20,6 +20,7 @@ import {
 } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Spinner from '../Spinner/Spinner';
 
 interface DataType {
 	key: React.Key;
@@ -254,37 +255,42 @@ const AdminTeamManagement = () => {
 					style={{ margin: '10px 0' }}
 				/>
 			</Modal>
-
-			<Flex gap={10}>
-				<Input
-					placeholder="Search a team"
-					style={{ maxWidth: '350px' }}
-					onChange={(e) => {
-						setSearchTerm(e.target.value);
-					}}
-				/>
-			</Flex>
-			<Flex gap={10} style={{ marginTop: '15px' }}>
-				<Button onClick={() => router.push('/admin/create_team')}>
-					Create a team
-				</Button>
-				<Button onClick={() => setOpen(true)}>Create an address</Button>
-			</Flex>
-			<div style={{ marginTop: '15px' }}>
-				{isMobile ? (
-					<Table
-						columns={mobileColumns}
-						dataSource={data}
-						pagination={paginationConfig}
-					/>
-				) : (
-					<Table
-						columns={columns}
-						dataSource={data}
-						pagination={paginationConfig}
-					/>
-				)}
-			</div>
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<>
+					<Flex gap={10}>
+						<Input
+							placeholder="Search a team"
+							style={{ maxWidth: '350px' }}
+							onChange={(e) => {
+								setSearchTerm(e.target.value);
+							}}
+						/>
+					</Flex>
+					<Flex gap={10} style={{ marginTop: '15px' }}>
+						<Button onClick={() => router.push('/admin/create_team')}>
+							Create a team
+						</Button>
+						<Button onClick={() => setOpen(true)}>Create an address</Button>
+					</Flex>
+					<div style={{ marginTop: '15px' }}>
+						{isMobile ? (
+							<Table
+								columns={mobileColumns}
+								dataSource={data}
+								pagination={paginationConfig}
+							/>
+						) : (
+							<Table
+								columns={columns}
+								dataSource={data}
+								pagination={paginationConfig}
+							/>
+						)}
+					</div>
+				</>
+			)}
 		</Card>
 	);
 };

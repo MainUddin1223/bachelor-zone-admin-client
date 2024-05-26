@@ -16,6 +16,7 @@ import { Input } from 'antd';
 import { useState } from 'react';
 import { useDebounced } from '@/redux/hooks';
 import { useGetTeamOrdersQuery } from '@/redux/api/adminApi';
+import Spinner from '../Spinner/Spinner';
 
 const Lunch_tiffin = () => {
 	const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1000;
@@ -35,7 +36,6 @@ const Lunch_tiffin = () => {
 	if (!!debouncedTerm) {
 		query['search'] = searchTerm;
 	}
-	query['status'] = status;
 	query['date'] = orderDate;
 
 	const { data: result, isLoading } = useGetTeamOrdersQuery({ ...query });
@@ -91,23 +91,31 @@ const Lunch_tiffin = () => {
 	};
 	return (
 		<div>
-			<Flex gap={10} style={{ margin: '15px 0' }}>
-				<Input
-					placeholder="Search a team"
-					style={{ maxWidth: '350px' }}
-					onChange={(e) => {
-						setSearchTerm(e.target.value);
-					}}
-				/>
-				<DatePicker onChange={onChange} defaultValue={defaultValue} />
-			</Flex>
-			<div style={{ marginTop: '15px' }}>
-				{isMobile ? (
-					<Table columns={mobileColumns} dataSource={data} />
+			<Card title={<h2 style={{ textAlign: 'center' }}>Order list</h2>}>
+				{isLoading ? (
+					<Spinner />
 				) : (
-					<Table columns={columns} dataSource={data} />
+					<>
+						<Flex gap={10} style={{ margin: '15px 0' }}>
+							<Input
+								placeholder="Search a team"
+								style={{ maxWidth: '350px' }}
+								onChange={(e) => {
+									setSearchTerm(e.target.value);
+								}}
+							/>
+							<DatePicker onChange={onChange} defaultValue={defaultValue} />
+						</Flex>
+						<div style={{ marginTop: '15px' }}>
+							{isMobile ? (
+								<Table columns={mobileColumns} dataSource={data} />
+							) : (
+								<Table columns={columns} dataSource={data} />
+							)}
+						</div>
+					</>
 				)}
-			</div>
+			</Card>
 		</div>
 	);
 };

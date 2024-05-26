@@ -58,12 +58,16 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 	}, [data, isLoading]);
 
 	const handleAddressChange = (value: number) => {
-		if (addresses?.length > 1) {
+		if (addresses?.length > 0) {
 			const address = addresses.find((address) => address.id == value);
 			setClaimUserPayload({
 				...claimUserPayload,
 				address: address?.address,
 				addressId: address?.id,
+				teamId: '',
+				team: '',
+				leader: '',
+				leaderPhone: '',
 			});
 			setTeams(addresses.find((address) => address.id == value)?.Team);
 		}

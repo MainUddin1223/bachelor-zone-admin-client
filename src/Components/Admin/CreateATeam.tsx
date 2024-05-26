@@ -24,15 +24,26 @@ const CreateATeam = () => {
 		addresses: [],
 	});
 	const [getUserInfo] = useGetUserInfoMutation();
+	const [isLoading, setIsLoading] = useState(false);
+	const [isCreating, setIsCreating] = useState(false);
 	const handleSearch = async () => {
+		setIsLoading(true);
 		const phoneRegex = /^(01|\+8801)\d{9}$/;
 		if (!phoneRegex.test(phone)) {
 			message.error('Invalid Phone number');
+			setIsLoading(false);
 			return;
 		}
 		const phoneNumber = phone.startsWith('0') ? '+88' + phone : phone;
 		const result: any = await getUserInfo({ phone: phoneNumber });
+		setIsLoading(false);
 		if (!result?.data?.success) {
+			setTeamData({
+				...teamData,
+				phone: '',
+				leader_id: '',
+			});
+			setAddresses({ ...addresses, addresses: [] });
 			message.error(result?.data?.message);
 		} else {
 			if (result?.data?.isSavedAddress) {
@@ -62,6 +73,7 @@ const CreateATeam = () => {
 	};
 
 	const handleCreateTeam = async () => {
+		setIsCreating(true);
 		const data = {
 			name: teamData.teamName,
 			leader_id: teamData.leader_id,
@@ -70,8 +82,10 @@ const CreateATeam = () => {
 		const result: any = await createTeam(data);
 		if (!result?.data.success) {
 			message.error(result?.data?.message);
+			setIsCreating(false);
 		} else {
 			message.success(result?.data?.message);
+			setIsCreating(false);
 			router.push('/admin/team_management');
 		}
 	};
@@ -110,6 +124,7 @@ const CreateATeam = () => {
 						<Button
 							style={{ margin: '15px 0' }}
 							onClick={handleCreateTeam}
+							loading={isCreating}
 							disabled={
 								!teamData.teamName ||
 								!teamData.address_id ||
@@ -131,6 +146,7 @@ const CreateATeam = () => {
 										onChange={(e) => setPhone(e.target.value)}
 									/>
 									<Button
+										loading={isLoading}
 										disabled={
 											phone.length == 11 || phone.length == 14 ? false : true
 										}

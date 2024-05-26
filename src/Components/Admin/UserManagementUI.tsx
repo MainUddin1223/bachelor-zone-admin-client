@@ -14,6 +14,7 @@ import {
 } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Spinner from '../Spinner/Spinner';
 interface DataType {
 	key: React.Key;
 	user_name: string;
@@ -125,46 +126,52 @@ const UserManagementUI = () => {
 		setStatus(value);
 	};
 	return (
-		<Card
-			title={
-				<h1 style={{ padding: '10px', textAlign: 'center' }}>
-					User Management
-				</h1>
-			}
-		>
-			<Select
-				defaultValue={status}
-				style={{ width: 120 }}
-				onChange={handleChange}
-				options={[
-					{ value: 'all', label: 'All Users' },
-					{ value: 'claimed', label: 'Claimed Users' },
-					{ value: 'unclaimed', label: 'Unclaimed User' },
-				]}
-			/>
-			<Flex gap={10} style={{ margin: '15px 0' }}>
-				<Input
-					placeholder="Search a User"
-					style={{ maxWidth: '350px' }}
-					onChange={(e) => setSearchTerm(e.target.value)}
-				/>
-			</Flex>
-			<div>
-				{isMobile ? (
-					<Table
-						columns={mobileColumns}
-						dataSource={result}
-						pagination={paginationConfig}
+		<>
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<Card
+					title={
+						<h1 style={{ padding: '10px', textAlign: 'center' }}>
+							User Management
+						</h1>
+					}
+				>
+					<Select
+						defaultValue={status}
+						style={{ width: 120 }}
+						onChange={handleChange}
+						options={[
+							{ value: 'all', label: 'All Users' },
+							{ value: 'claimed', label: 'Claimed Users' },
+							{ value: 'unclaimed', label: 'Unclaimed User' },
+						]}
 					/>
-				) : (
-					<Table
-						columns={columns}
-						dataSource={result}
-						pagination={paginationConfig}
-					/>
-				)}
-			</div>
-		</Card>
+					<Flex gap={10} style={{ margin: '15px 0' }}>
+						<Input
+							placeholder="Search a User"
+							style={{ maxWidth: '350px' }}
+							onChange={(e) => setSearchTerm(e.target.value)}
+						/>
+					</Flex>
+					<div>
+						{isMobile ? (
+							<Table
+								columns={mobileColumns}
+								dataSource={result}
+								pagination={paginationConfig}
+							/>
+						) : (
+							<Table
+								columns={columns}
+								dataSource={result}
+								pagination={paginationConfig}
+							/>
+						)}
+					</div>
+				</Card>
+			)}
+		</>
 	);
 };
 

@@ -22,6 +22,7 @@ import {
 import { SizeType } from 'antd/es/config-provider/SizeContext';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import Spinner from '../Spinner/Spinner';
 
 interface DataType {
 	key: React.Key;
@@ -206,7 +207,6 @@ const OrderManagement = () => {
 	const onChange: DatePickerProps['onChange'] = (date, dateString) => {
 		setOrderDate(date);
 	};
-
 	return (
 		<Card
 			title={
@@ -263,13 +263,17 @@ const OrderManagement = () => {
 					<Radio.Button value="canceled">Canceled</Radio.Button>
 				</Radio.Group>
 			</div>
-			<div style={{ marginTop: '15px' }}>
-				{isMobile ? (
-					<Table columns={mobileColumns} dataSource={data} />
-				) : (
-					<Table columns={columns} dataSource={data} />
-				)}
-			</div>
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<div style={{ marginTop: '15px' }}>
+					{isMobile ? (
+						<Table columns={mobileColumns} dataSource={data} />
+					) : (
+						<Table columns={columns} dataSource={data} loading={isLoading} />
+					)}
+				</div>
+			)}
 		</Card>
 	);
 };
