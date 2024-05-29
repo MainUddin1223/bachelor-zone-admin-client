@@ -92,6 +92,7 @@ const Login = () => {
 						backgroundColor: 'var(--brand-color)',
 					}}
 					className={Styles.login_btn}
+					loading={isLoading}
 					disabled={
 						loginData.phone.length == 11 || loginData.phone.length == 14
 							? !loginData.phone || !loginData.password
