@@ -1,6 +1,7 @@
 import {
 	CreditCardOutlined,
 	HomeOutlined,
+	LogoutOutlined,
 	TableOutlined,
 	UserOutlined,
 } from '@ant-design/icons';
@@ -109,6 +110,16 @@ export const sidebarItems = (role: string) => {
 			label: <Link href={`/${role}/delivery_men`}>Delivery Men</Link>,
 			icon: <TableOutlined style={{ fontSize: '21px' }} />,
 			key: `/${role}/delivery_men`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: (
+				<Link onClick={() => localStorage.clear()} href={`/`}>
+					Logout
+				</Link>
+			),
+			icon: <LogoutOutlined style={{ fontSize: '21px' }} />,
+			key: `/`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
 	];

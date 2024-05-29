@@ -91,7 +91,7 @@ const Lunch_tiffin = () => {
 		},
 	];
 	const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-		setOrderDate(date);
+		setOrderDate(dateString);
 	};
 	return (
 		<div>
@@ -102,7 +102,7 @@ const Lunch_tiffin = () => {
 					<>
 						<Flex gap={10} style={{ margin: '15px 0' }}>
 							<Input
-								placeholder="Search a team"
+								placeholder="Search an order"
 								style={{ maxWidth: '350px' }}
 								onChange={(e) => {
 									setSearchTerm(e.target.value);

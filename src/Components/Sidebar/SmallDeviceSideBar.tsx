@@ -52,10 +52,10 @@ const SmallDeviceSideBar = ({ open, setOpen }: ISideBarProps) => {
 					onClick={handleLogout}
 					style={{
 						cursor: 'pointer',
-						border: '1px solid var(--accent-color)',
+						border: '1px solid var(--primary-color)',
 						padding: '10px 20px ',
 						margin: '0 auto',
-						width: '100%',
+						width: '97%',
 						fontSize: '19px',
 						fontWeight: 'bold',
 						backgroundColor: 'white',

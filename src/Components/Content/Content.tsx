@@ -48,17 +48,13 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
 		<Content style={{ minHeight: '100vh', color: 'black' }}>
 			<Header
 				className={styles.header_container}
-				style={{ backgroundColor: 'var(--secondary-color)' }}
+				style={{ backgroundColor: 'var(--primary-color)', padding: '15px' }}
 			>
 				{/* mobile nav bar */}
 				<div className={styles.nav_container_mobile}>
-					{/* <Image
-						style={{ cursor: 'pointer' }}
-						src={logo}
-						height={40}
-						alt="logo"
-						onClick={() => router.push(`/`)}
-					/> */}
+					<p>
+						<b>LUNCH TIME</b>
+					</p>
 					<MenuOutlined
 						onClick={() => setOpen(true)}
 						style={{
