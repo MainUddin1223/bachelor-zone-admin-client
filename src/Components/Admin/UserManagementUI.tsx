@@ -42,7 +42,7 @@ const UserManagementUI = () => {
 	query['status'] = status;
 	query['page'] = page;
 
-	const { data, isLoading } = useGetUsersQuery({ ...query });
+	const { data, isLoading, isFetching } = useGetUsersQuery({ ...query });
 	const result = data?.result;
 	const meta = data?.meta;
 	const onPaginationChange = (page: number) => {
@@ -154,21 +154,25 @@ const UserManagementUI = () => {
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
 					</Flex>
-					<div>
-						{isMobile ? (
-							<Table
-								columns={mobileColumns}
-								dataSource={result}
-								pagination={paginationConfig}
-							/>
-						) : (
-							<Table
-								columns={columns}
-								dataSource={result}
-								pagination={paginationConfig}
-							/>
-						)}
-					</div>
+					{isFetching ? (
+						<Spinner />
+					) : (
+						<div>
+							{isMobile ? (
+								<Table
+									columns={mobileColumns}
+									dataSource={result}
+									pagination={paginationConfig}
+								/>
+							) : (
+								<Table
+									columns={columns}
+									dataSource={result}
+									pagination={paginationConfig}
+								/>
+							)}
+						</div>
+					)}
 				</Card>
 			)}
 		</>

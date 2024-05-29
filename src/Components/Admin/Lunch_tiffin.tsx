@@ -38,7 +38,11 @@ const Lunch_tiffin = () => {
 	}
 	query['date'] = orderDate;
 
-	const { data: result, isLoading } = useGetTeamOrdersQuery({ ...query });
+	const {
+		data: result,
+		isLoading,
+		isFetching,
+	} = useGetTeamOrdersQuery({ ...query });
 	const data = result?.orders;
 	const columns: TableColumnsType<any> = [
 		{
@@ -106,13 +110,17 @@ const Lunch_tiffin = () => {
 							/>
 							<DatePicker onChange={onChange} defaultValue={defaultValue} />
 						</Flex>
-						<div style={{ marginTop: '15px' }}>
-							{isMobile ? (
-								<Table columns={mobileColumns} dataSource={data} />
-							) : (
-								<Table columns={columns} dataSource={data} />
-							)}
-						</div>
+						{isFetching ? (
+							<Spinner />
+						) : (
+							<div style={{ marginTop: '15px' }}>
+								{isMobile ? (
+									<Table columns={mobileColumns} dataSource={data} />
+								) : (
+									<Table columns={columns} dataSource={data} />
+								)}
+							</div>
+						)}
 					</>
 				)}
 			</Card>

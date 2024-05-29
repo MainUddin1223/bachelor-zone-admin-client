@@ -84,7 +84,11 @@ const OrderManagement = () => {
 	query['status'] = status;
 	query['date'] = orderDate;
 
-	const { data: result, isLoading } = useGetTeamOrdersQuery({ ...query });
+	const {
+		data: result,
+		isLoading,
+		isFetching,
+	} = useGetTeamOrdersQuery({ ...query });
 	const data = result?.result;
 	const columns: TableColumnsType<DataType> = [
 		{
@@ -123,23 +127,27 @@ const OrderManagement = () => {
 			render: (data) => {
 				return (
 					<div>
-						<Button
-							disabled={
-								formatDate == data?.delivery_date.split('T')[0] ? false : true
-							}
-							onClick={() => {
-								setConfirmDeliver(true);
-								setConfirmData({
-									...confirmData,
-									id: data?.team_id,
-									team_name: data?.team_name,
-									address: data?.address,
-								});
-							}}
-							style={{ marginRight: '10px' }}
-						>
-							Deliver
-						</Button>
+						{data?.status == 'canceled' ? (
+							<></>
+						) : (
+							<Button
+								disabled={
+									formatDate == data?.delivery_date.split('T')[0] ? false : true
+								}
+								onClick={() => {
+									setConfirmDeliver(true);
+									setConfirmData({
+										...confirmData,
+										id: data?.team_id,
+										team_name: data?.team_name,
+										address: data?.address,
+									});
+								}}
+								style={{ marginRight: '10px' }}
+							>
+								Deliver
+							</Button>
+						)}
 						<Button
 							onClick={() => {
 								setOrderList(data.orderList);
@@ -263,7 +271,7 @@ const OrderManagement = () => {
 					<Radio.Button value="canceled">Canceled</Radio.Button>
 				</Radio.Group>
 			</div>
-			{isLoading ? (
+			{isLoading || isFetching ? (
 				<Spinner />
 			) : (
 				<div style={{ marginTop: '15px' }}>
