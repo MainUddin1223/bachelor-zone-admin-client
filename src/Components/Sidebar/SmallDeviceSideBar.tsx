@@ -3,6 +3,7 @@ import { CloseCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Drawer, Menu } from 'antd';
 import { useRouter } from 'next/navigation';
 import { sidebarItems } from '../constants/sidebarItems';
+import { getAuthInfo } from '@/utils/jwt';
 
 export type ISideBarProps = {
 	open: boolean;
@@ -10,7 +11,7 @@ export type ISideBarProps = {
 };
 
 const SmallDeviceSideBar = ({ open, setOpen }: ISideBarProps) => {
-	const role = 'admin';
+	const info: any = getAuthInfo();
 	const router = useRouter();
 
 	const onClose = () => {
@@ -46,7 +47,7 @@ const SmallDeviceSideBar = ({ open, setOpen }: ISideBarProps) => {
 					}}
 					defaultSelectedKeys={['1']}
 					mode="inline"
-					items={sidebarItems(role)}
+					items={sidebarItems(info.role)}
 				/>
 				<p
 					onClick={handleLogout}

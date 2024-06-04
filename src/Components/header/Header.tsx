@@ -17,7 +17,7 @@ const Header = () => {
 				<Flex justify="space-between" align="center">
 					<div>
 						<h1 className={Styles.text_logo} onClick={() => router.push('/')}>
-							Bachelor Zone
+							Lunch Time
 						</h1>
 					</div>
 				</Flex>

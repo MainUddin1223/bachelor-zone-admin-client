@@ -12,6 +12,12 @@ import { USER_ROLE } from './role';
 export const sidebarItems = (role: string) => {
 	const defaultSidebarItems: MenuProps['items'] = [
 		{
+			label: <Link href={`/${role}/`}>Dashboard</Link>,
+			icon: <UserOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
 			label: <Link href={`/${role}/lunch_tiffin`}>Orders</Link>,
 			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
 			key: `/${role}/lunch_tiffin`,
@@ -23,27 +29,15 @@ export const sidebarItems = (role: string) => {
 			key: `/${role}/order_management`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
-		// {
-		// 	label: <Link href={`/${role}/dinner`}>Dinner</Link>,
-		// 	icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
-		// 	key: `/${role}/dinner`,
-		// 	style: { border: '1px solid var(--primary-color)' },
-		// },
-		// {
-		// 	label: <Link href={`/${role}/lunch`}>Lunch</Link>,
-		// 	icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
-		// 	key: `/${role}/lunch`,
-		// 	style: { border: '1px solid var(--primary-color)' },
-		// },
+		{
+			label: <Link href={`/${role}/user_management`}>User Management</Link>,
+			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/user_management`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
 	];
 
 	const adminSidebarItems: MenuProps['items'] = [
-		{
-			label: <Link href={`/${role}/`}>Dashboard</Link>,
-			icon: <UserOutlined style={{ fontSize: '21px' }} />,
-			key: `/${role}/`,
-			style: { border: '1px solid var(--primary-color)' },
-		},
 		...defaultSidebarItems,
 		// {
 		// 	label: <Link href={`/${role}/statics`}>Statics</Link>,
@@ -69,13 +63,6 @@ export const sidebarItems = (role: string) => {
 		// 	key: `/${role}/dinner`,
 		// 	style: { border: '1px solid var(--primary-color)' },
 		// },
-
-		{
-			label: <Link href={`/${role}/user_management`}>User Management</Link>,
-			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
-			key: `/${role}/user_management`,
-			style: { border: '1px solid var(--primary-color)' },
-		},
 		// {
 		// 	label: <Link href={`/${role}/bazar`}>Bazar</Link>,
 		// 	icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
@@ -123,7 +110,38 @@ export const sidebarItems = (role: string) => {
 			style: { border: '1px solid var(--primary-color)' },
 		},
 	];
+	const supplierSidebarItems: MenuProps['items'] = [
+		...defaultSidebarItems,
+		{
+			label: <Link href={`/${role}/pick_up`}>Pickup Boxes</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/pick_up`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: <Link href={`/${role}/addresses`}>Addresses</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/addresses`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: <Link href={`/${role}/transactions`}>Transactions</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/transactions`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: (
+				<Link onClick={() => localStorage.clear()} href={`/`}>
+					Logout
+				</Link>
+			),
+			icon: <LogoutOutlined style={{ fontSize: '21px' }} />,
+			key: `/`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+	];
 
 	if (role === USER_ROLE.ADMIN) return adminSidebarItems;
-	else if (role === USER_ROLE.MOD) return defaultSidebarItems;
+	else if (role === USER_ROLE.SUPPLIER) return supplierSidebarItems;
 };

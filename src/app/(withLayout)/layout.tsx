@@ -15,16 +15,16 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	// useEffect(() => {
-	// 	if (!userLoggedIn) {
-	// 		router.push('/login');
-	// 	}
-	// 	setIsLoading(true);
-	// }, [router, isLoading]);
+	useEffect(() => {
+		if (!userLoggedIn) {
+			router.push('/');
+		}
+		setIsLoading(true);
+	}, [router, isLoading]);
 
-	// if (!isLoading) {
-	// 	return <Spinner/>;
-	// }
+	if (!isLoading) {
+		return <Spinner />;
+	}
 	return (
 		<Layout hasSider>
 			<div className={styles.desktop_sideBar}>

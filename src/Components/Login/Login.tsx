@@ -1,15 +1,14 @@
 'use client';
 import { Button, Card, Input, Modal, message } from 'antd';
 import Styles from './Login.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Spinner from '../Spinner/Spinner';
 import { useRouter } from 'next/navigation';
 import { getAuthInfo } from '@/utils/jwt';
 import { useLoginMutation } from '@/redux/api/adminApi';
-import axios from 'axios';
 
 const Login = () => {
-	const userInfo = getAuthInfo();
+	const userInfo: any = getAuthInfo();
 	const router = useRouter();
 	const [login] = useLoginMutation();
 	const [isLoading, setIsLoading] = useState(false);
@@ -17,9 +16,11 @@ const Login = () => {
 		phone: '',
 		password: '',
 	});
-	if (userInfo) {
-		router.push(`${'admin'}/`);
-	}
+	useEffect(() => {
+		if (userInfo?.role) {
+			router.push(`${userInfo?.role}/`);
+		}
+	}, []);
 
 	const handleLogin = async () => {
 		try {

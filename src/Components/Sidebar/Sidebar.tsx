@@ -2,11 +2,13 @@
 import { Layout, Menu } from 'antd';
 import { useState } from 'react';
 import { sidebarItems } from '../constants/sidebarItems';
+import { getAuthInfo } from '@/utils/jwt';
 
 const { Sider } = Layout;
 
 const Sidebar = () => {
 	const [collapsed, setCollapsed] = useState(false);
+	const info: any = getAuthInfo();
 	return (
 		<Sider
 			collapsible
@@ -32,7 +34,7 @@ const Sidebar = () => {
 					color: 'black',
 				}}
 			>
-				{collapsed ? 'BZ' : 'BACHELOR ZONE'}
+				{collapsed ? 'LT' : 'LUNCH TIME'}
 			</div>
 			<Menu
 				style={{
@@ -43,7 +45,7 @@ const Sidebar = () => {
 				}}
 				defaultSelectedKeys={['1']}
 				mode="inline"
-				items={sidebarItems('admin')}
+				items={sidebarItems(info.role)}
 			/>
 		</Sider>
 	);

@@ -15,7 +15,7 @@ const Footer = () => {
 				<Row gutter={[20, 20]}>
 					<Col xs={12} md={6}>
 						<div>
-							<h3>Bachelor Zone</h3>
+							<h3>Lunch Time</h3>
 							<p className={Styles.info_container}>
 								Enjoy your profession and make your life easier
 							</p>
@@ -54,7 +54,7 @@ const Footer = () => {
 				<hr />
 				<div className={Styles.copyright_container}>
 					<p>
-						&#169; {year} Bachelor Zone, Catering service, Mirshari, Chattogram
+						&#169; {year} Lunch Time, Catering service, Mirshari, Chattogram
 					</p>
 					<div className={Styles.privacy_container}>
 						<p> PRIVACY POLICY</p>

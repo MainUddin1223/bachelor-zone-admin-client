@@ -75,7 +75,7 @@ const OrderManagement = () => {
 
 	const debouncedTerm = useDebounced({
 		searchQuery: searchTerm,
-		delay: 1000,
+		delay: 2000,
 	});
 
 	if (!!debouncedTerm) {
@@ -213,7 +213,7 @@ const OrderManagement = () => {
 	};
 
 	const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-		setOrderDate(date);
+		setOrderDate(dateString);
 	};
 	return (
 		<Card
