@@ -112,6 +112,14 @@ const OrderManagement = () => {
 			dataIndex: 'address',
 		},
 		{
+			title: <h3>Supplier Name</h3>,
+			render: (data) => <p>{data?.supplier?.name}</p>,
+		},
+		{
+			title: <h3>Supplier Phone</h3>,
+			render: (data) => <p>{data?.supplier?.contact_no}</p>,
+		},
+		{
 			title: <h3>Delivery Date</h3>,
 			render: (data) => <p>{data?.delivery_date.split('T')[0]}</p>,
 		},
@@ -169,8 +177,10 @@ const OrderManagement = () => {
 					<div>
 						<h4>Team Name : {data.team_name}</h4>
 						<p>Team Leader : {data.leaderName}</p>
-						<p>Address : {data.address}</p>
 						<p>Order : {data.order_count}</p>
+						<p>Address : {data.address}</p>
+						<p>Supplier name : {data?.supplier?.name}</p>
+						<p>Supplier Phone : {data?.supplier?.contact_no}</p>
 						<p>Delivery Date: {data?.delivery_date.split('T')[0]}</p>
 						<p>Status: {data.status}</p>
 						<p>Due Boxes : {data.due_boxes}</p>

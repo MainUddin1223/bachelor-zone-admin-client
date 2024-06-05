@@ -102,6 +102,18 @@ const AdminTeamManagement = () => {
 			},
 		},
 		{
+			title: <h3>Supplier</h3>,
+			render: (data: any) => {
+				return <p>{data?.address?.supplier?.name}</p>;
+			},
+		},
+		{
+			title: <h3>Supplier Phone</h3>,
+			render: (data: any) => {
+				return <p>{data?.address?.supplier?.contact_no}</p>;
+			},
+		},
+		{
 			title: <h3>Dew Boxes</h3>,
 			render: (data: any) => {
 				return <p>{data.due_boxes}</p>;
@@ -152,6 +164,8 @@ const AdminTeamManagement = () => {
 						<p>Address : {data.address.address}</p>
 						<p>Team Leader : {data.leader.name}</p>
 						<p>Leader Phone Number : {data.leader.phone}</p>
+						<p>Supplier : {data.address?.supplier?.name}</p>
+						<p>Supplier Phone : {data.address?.supplier?.contact_no}</p>
 						<p>Total Member : {data.member}</p>
 						<p>Due Boxes : {data.due_boxes}</p>
 						<div style={{ display: 'flex', gap: '5px' }}>

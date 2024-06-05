@@ -113,6 +113,14 @@ const adminApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['admin'],
 		}),
+		changeLeader: build.mutation({
+			query: (data) => ({
+				url: `${adminUrl}/change-leader`,
+				method: 'POST',
+				data,
+			}),
+			invalidatesTags: ['admin'],
+		}),
 		rechargeBalance: build.mutation({
 			query: (data) => ({
 				url: `${adminUrl}/recharge`,
@@ -169,6 +177,7 @@ export const {
 	useGetUsersQuery,
 	useGetUserByIdQuery,
 	useChangeTeamMutation,
+	useChangeLeaderMutation,
 	useRechargeBalanceMutation,
 	useRefundBalanceMutation,
 	useGetUnclaimedUserQuery,

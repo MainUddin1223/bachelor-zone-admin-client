@@ -39,12 +39,12 @@ export const sidebarItems = (role: string) => {
 
 	const adminSidebarItems: MenuProps['items'] = [
 		...defaultSidebarItems,
-		// {
-		// 	label: <Link href={`/${role}/statics`}>Statics</Link>,
-		// 	icon: <TableOutlined style={{ fontSize: '21px' }} />,
-		// 	key: `/${role}/statics`,
-		// 	style: { border: '1px solid var(--primary-color)' },
-		// },
+		{
+			label: <Link href={`/${role}/delivery_point`}>Delivery Point</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/delivery_point`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
 		// {
 		// 	label: <Link href={`/${role}/tiffin`}>Tiffin</Link>,
 		// 	icon: <TableOutlined style={{ fontSize: '21px' }} />,
