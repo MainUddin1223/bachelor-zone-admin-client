@@ -18,8 +18,10 @@ import Image from 'next/image';
 import { useGetDeliveryPointQuery } from '@/redux/api/supplierApi';
 import { useDebounced } from '@/redux/hooks';
 import Spinner from '../Spinner/Spinner';
+import { useRouter } from 'next/navigation';
 
 const DeliveryPoints = () => {
+	const router = useRouter();
 	const defaultValue = dayjs(Date.now());
 	const todayDate = defaultValue.format();
 	const formatDate = todayDate.split('T')[0];
@@ -95,6 +97,11 @@ const DeliveryPoints = () => {
 												<h4>Total due boxes : {address?.totalDueBoxes}</h4>
 											</div>
 											<Button
+												onClick={() =>
+													router.push(
+														`/admin/delivery_point/${address?.addressId}`
+													)
+												}
 												style={{ margin: '10px 0', marginLeft: '25px' }}
 												type="primary"
 											>
@@ -105,7 +112,13 @@ const DeliveryPoints = () => {
 								))}
 							</Row>
 						</div>
-						<div style={{ display: 'flex', justifyContent: 'right' }}>
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'right',
+								marginTop: '15px',
+							}}
+						>
 							<Pagination defaultCurrent={meta?.page} total={meta?.total} />
 						</div>
 					</div>

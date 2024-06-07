@@ -12,6 +12,13 @@ const supplierApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['supplier', 'admin'],
 		}),
+		getDeliveryPointById: build.query({
+			query: (id) => ({
+				url: `${supplier}/delivery-address/${id}`,
+				method: 'GET',
+			}),
+			providesTags: ['supplier', 'admin'],
+		}),
 		// submitAnswer: build.mutation({
 		// 	query: (data) => ({
 		// 		url: `${supplier}/verify-answer/${data.id}`,
@@ -30,4 +37,5 @@ const supplierApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetDeliveryPointQuery } = supplierApi;
+export const { useGetDeliveryPointQuery, useGetDeliveryPointByIdQuery } =
+	supplierApi;
