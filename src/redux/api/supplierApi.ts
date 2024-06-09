@@ -19,6 +19,28 @@ const supplierApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['supplier', 'admin'],
 		}),
+		getPickupPoint: build.query({
+			query: (data) => ({
+				url: `${supplier}/pickup`,
+				method: 'GET',
+				params: data,
+			}),
+			providesTags: ['supplier'],
+		}),
+		getPickupPointById: build.query({
+			query: (id) => ({
+				url: `${supplier}/pickup/${id}`,
+				method: 'GET',
+			}),
+			providesTags: ['supplier'],
+		}),
+		pickupBoxes: build.mutation({
+			query: (id) => ({
+				url: `${supplier}/pick-up/${id}`,
+				method: 'POST',
+			}),
+			invalidatesTags: ['supplier'],
+		}),
 		// submitAnswer: build.mutation({
 		// 	query: (data) => ({
 		// 		url: `${supplier}/verify-answer/${data.id}`,
@@ -37,5 +59,10 @@ const supplierApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetDeliveryPointQuery, useGetDeliveryPointByIdQuery } =
-	supplierApi;
+export const {
+	useGetDeliveryPointQuery,
+	useGetDeliveryPointByIdQuery,
+	useGetPickupPointByIdQuery,
+	useGetPickupPointQuery,
+	usePickupBoxesMutation,
+} = supplierApi;

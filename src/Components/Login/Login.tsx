@@ -41,7 +41,8 @@ const Login = () => {
 				const accessToken = res?.accessToken;
 				typeof window !== 'undefined' &&
 					localStorage.setItem('accessToken', accessToken);
-				router.push(`${'admin'}/`);
+				const getInfo: any = getAuthInfo();
+				router.push(`${getInfo?.role}/`);
 				setIsLoading(false);
 			} else {
 				setIsLoading(false);

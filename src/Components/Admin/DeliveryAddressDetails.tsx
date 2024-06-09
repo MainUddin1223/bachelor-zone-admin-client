@@ -14,7 +14,7 @@ const DeliveryAddressDetails = ({ addressId }: { addressId: number }) => {
 	const [open, setOpen] = useState(false);
 	useEffect(() => {
 		setTeams(data?.Teams);
-	}, []);
+	}, [data]);
 	const handleSearch = (value: string) => {
 		const lowercasedValue = value.toLowerCase();
 		const findTeams = data.Teams.filter((team: { name: string }) =>

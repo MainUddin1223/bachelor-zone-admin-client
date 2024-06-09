@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { USER_ROLE } from './role';
 
 export const sidebarItems = (role: string) => {
-	const defaultSidebarItems: MenuProps['items'] = [
+	const adminSidebarItems: MenuProps['items'] = [
 		{
 			label: <Link href={`/${role}/`}>Dashboard</Link>,
 			icon: <UserOutlined style={{ fontSize: '21px' }} />,
@@ -35,10 +35,6 @@ export const sidebarItems = (role: string) => {
 			key: `/${role}/user_management`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
-	];
-
-	const adminSidebarItems: MenuProps['items'] = [
-		...defaultSidebarItems,
 		{
 			label: <Link href={`/${role}/delivery_point`}>Delivery Point</Link>,
 			icon: <TableOutlined style={{ fontSize: '21px' }} />,
@@ -110,24 +106,36 @@ export const sidebarItems = (role: string) => {
 			style: { border: '1px solid var(--primary-color)' },
 		},
 	];
+
 	const supplierSidebarItems: MenuProps['items'] = [
-		...defaultSidebarItems,
 		{
-			label: <Link href={`/${role}/pick_up`}>Pickup Boxes</Link>,
-			icon: <TableOutlined style={{ fontSize: '21px' }} />,
-			key: `/${role}/pick_up`,
+			label: <Link href={`/${role}/`}>Dashboard</Link>,
+			icon: <UserOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
 		{
-			label: <Link href={`/${role}/addresses`}>Addresses</Link>,
+			label: <Link href={`/${role}/delivery_address`}>Delivery Address</Link>,
 			icon: <TableOutlined style={{ fontSize: '21px' }} />,
-			key: `/${role}/addresses`,
+			key: `/${role}/delivery_address`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: <Link href={`/${role}/pickup_address`}>Pickup Address</Link>,
+			icon: <TableOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/pickup_address`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
 		{
 			label: <Link href={`/${role}/transactions`}>Transactions</Link>,
 			icon: <TableOutlined style={{ fontSize: '21px' }} />,
 			key: `/${role}/transactions`,
+			style: { border: '1px solid var(--primary-color)' },
+		},
+		{
+			label: <Link href={`/${role}/user_management`}>User Management</Link>,
+			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
+			key: `/${role}/user_management`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
 		{

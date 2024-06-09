@@ -49,23 +49,6 @@ const SmallDeviceSideBar = ({ open, setOpen }: ISideBarProps) => {
 					mode="inline"
 					items={sidebarItems(info.role)}
 				/>
-				<p
-					onClick={handleLogout}
-					style={{
-						cursor: 'pointer',
-						border: '1px solid var(--primary-color)',
-						padding: '10px 20px ',
-						margin: '0 auto',
-						width: '97%',
-						fontSize: '19px',
-						fontWeight: 'bold',
-						backgroundColor: 'white',
-						color: 'black',
-					}}
-				>
-					<LogoutOutlined style={{ fontSize: '21px', marginRight: '10px' }} />
-					Logout
-				</p>
 			</Drawer>
 		</>
 	);
