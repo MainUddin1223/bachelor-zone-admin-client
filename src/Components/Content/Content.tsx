@@ -3,8 +3,6 @@ import { getUserInfo } from '@/services/auth.service';
 import { MenuOutlined } from '@ant-design/icons';
 import { Layout } from 'antd';
 import { Header } from 'antd/es/layout/layout';
-import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './Content.module.css';

@@ -18,11 +18,6 @@ const SmallDeviceSideBar = ({ open, setOpen }: ISideBarProps) => {
 		setOpen(false);
 	};
 
-	const handleLogout = async () => {
-		localStorage.clear();
-		onClose();
-		router.push('/');
-	};
 
 	return (
 		<>
