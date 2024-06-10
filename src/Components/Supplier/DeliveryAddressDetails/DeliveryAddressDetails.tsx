@@ -72,10 +72,9 @@ const DeliveryAddressDetails = ({ addressId }: { addressId: number }) => {
 					</Modal>
 					{/* confirm deliver modal */}
 					<Modal
-						cancelButtonProps={{ style: { display: 'none' } }}
 						open={openConfirmation}
 						confirmLoading={confirming}
-						okText="Confirm Deliver"
+						okText={<span style={{ color: 'white' }}>Confirm Deliver</span>}
 						onOk={() => handleDeliver(teamData.id)}
 						onCancel={() => setOpenConfirmation(false)}
 						title={<h4>Team details</h4>}

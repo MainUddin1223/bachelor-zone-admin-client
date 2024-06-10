@@ -4,13 +4,21 @@ const supplier = '/supplier';
 
 const supplierApi = baseApi.injectEndpoints({
 	endpoints: (build) => ({
+		getTransactions: build.query({
+			query: (data) => ({
+				url: `${supplier}/transaction`,
+				method: 'GET',
+				params: data,
+			}),
+			providesTags: ['supplier'],
+		}),
 		getDeliveryPoint: build.query({
 			query: (data) => ({
 				url: `${supplier}/delivery-address`,
 				method: 'GET',
 				params: data,
 			}),
-			providesTags: ['supplier', 'admin'],
+			providesTags: ['supplier'],
 		}),
 		getDeliveryPointById: build.query({
 			query: (id) => ({
@@ -51,25 +59,11 @@ const supplierApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['supplier'],
 		}),
-		// submitAnswer: build.mutation({
-		// 	query: (data) => ({
-		// 		url: `${supplier}/verify-answer/${data.id}`,
-		// 		method: 'PATCH',
-		// 		data: data.answer,
-		// 	}),
-		// 	invalidatesTags: ['performer'],
-		// }),
-		// completeTest: build.mutation({
-		// 	query: (id) => ({
-		// 		url: `${supplier}/my-tests/${id}`,
-		// 		method: 'PATCH',
-		// 	}),
-		// 	invalidatesTags: ['performer'],
-		// }),
 	}),
 });
 
 export const {
+	useGetTransactionsQuery,
 	useGetDeliveryPointQuery,
 	useGetDeliveryPointByIdQuery,
 	useDeliverOrderMutation,
