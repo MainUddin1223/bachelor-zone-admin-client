@@ -18,7 +18,6 @@ const SmallDeviceSideBar = ({ open, setOpen }: ISideBarProps) => {
 		setOpen(false);
 	};
 
-
 	return (
 		<>
 			<Drawer

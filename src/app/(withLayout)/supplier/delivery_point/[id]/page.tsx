@@ -1,4 +1,4 @@
-import DeliveryAddressDetails from '@/Components/Admin/DeliveryAddressDetails';
+import DeliveryAddressDetails from '@/Components/Supplier/DeliveryAddressDetails/DeliveryAddressDetails';
 import React from 'react';
 
 const page = ({ params }: { params: any }) => {

@@ -1,9 +1,9 @@
-import DeliveryPoints from '@/Components/Admin/DeliveryPoints';
+import DeliveryPoint from '@/Components/Supplier/DeliverySpot/DeliverySpot';
 
 const page = () => {
 	return (
 		<div>
-			<DeliveryPoints />
+			<DeliveryPoint />
 		</div>
 	);
 };

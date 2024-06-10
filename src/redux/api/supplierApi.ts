@@ -19,6 +19,16 @@ const supplierApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['supplier', 'admin'],
 		}),
+		// deliver order by team id
+
+		deliverOrder: build.mutation({
+			query: (id) => ({
+				url: `${supplier}/deliver/${id}`,
+				method: 'POST',
+			}),
+			invalidatesTags: ['supplier'],
+		}),
+
 		getPickupPoint: build.query({
 			query: (data) => ({
 				url: `${supplier}/pickup`,
@@ -62,6 +72,7 @@ const supplierApi = baseApi.injectEndpoints({
 export const {
 	useGetDeliveryPointQuery,
 	useGetDeliveryPointByIdQuery,
+	useDeliverOrderMutation,
 	useGetPickupPointByIdQuery,
 	useGetPickupPointQuery,
 	usePickupBoxesMutation,
