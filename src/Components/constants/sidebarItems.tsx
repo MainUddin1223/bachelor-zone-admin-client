@@ -133,9 +133,9 @@ export const sidebarItems = (role: string) => {
 			style: { border: '1px solid var(--primary-color)' },
 		},
 		{
-			label: <Link href={`/${role}/user_management`}>User Management</Link>,
+			label: <Link href={`/${role}/recharge`}>Recharge</Link>,
 			icon: <CreditCardOutlined style={{ fontSize: '21px' }} />,
-			key: `/${role}/user_management`,
+			key: `/${role}/recharge`,
 			style: { border: '1px solid var(--primary-color)' },
 		},
 		{

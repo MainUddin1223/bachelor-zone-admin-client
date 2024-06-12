@@ -1,12 +1,14 @@
 'use client';
 
-import { useGetDeliveryPointByIdQuery } from '@/redux/api/supplierApi';
+import {
+	useDeliverOrderMutation,
+	useGetDeliveryPointByIdQuery,
+} from '@/redux/api/supplierApi';
 import locationImg from '@/assets/location.png';
 import Image from 'next/image';
 import { Button, Card, Col, Flex, Input, Modal, Row, message } from 'antd';
 import { useEffect, useState } from 'react';
 import Spinner from '@/Components/Spinner/Spinner';
-import { useDeliverOrderMutation } from '@/redux/api/adminApi';
 
 const DeliveryAddressDetails = ({ addressId }: { addressId: number }) => {
 	const [orderData, setOrderData] = useState([]);
@@ -33,8 +35,8 @@ const DeliveryAddressDetails = ({ addressId }: { addressId: number }) => {
 	const handleDeliver = async (id: number) => {
 		setConfirming(true);
 		const result: any = await deliverOrder(id);
-		if (!result.success) {
-			message.error(result.message);
+		if (!result?.data?.success) {
+			message.error(result?.data?.message);
 		} else {
 			message.success('Order deliver successfully');
 		}

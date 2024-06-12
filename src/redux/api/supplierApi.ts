@@ -4,6 +4,14 @@ const supplier = '/supplier';
 
 const supplierApi = baseApi.injectEndpoints({
 	endpoints: (build) => ({
+		rechargeBalance: build.mutation({
+			query: (data) => ({
+				url: `${supplier}/recharge`,
+				method: 'POST',
+				data: data,
+			}),
+			invalidatesTags: ['supplier'],
+		}),
 		getTransactions: build.query({
 			query: (data) => ({
 				url: `${supplier}/transaction`,
@@ -63,6 +71,7 @@ const supplierApi = baseApi.injectEndpoints({
 });
 
 export const {
+	useRechargeBalanceMutation,
 	useGetTransactionsQuery,
 	useGetDeliveryPointQuery,
 	useGetDeliveryPointByIdQuery,
