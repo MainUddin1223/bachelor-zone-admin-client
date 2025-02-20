@@ -43,8 +43,8 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 				address: data?.address?.address,
 				teamId: data.team_member.id,
 				team: data?.team_member?.name,
-				leader: data.team_member?.leader?.name,
-				leaderPhone: data.team_member?.leader?.phone,
+				leader: data?.team_member?.leader?.name,
+				leaderPhone: data?.team_member?.leader?.phone,
 			});
 		} else if (data?.address) {
 			setAddresses(data?.address);
@@ -59,7 +59,7 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 
 	const handleAddressChange = (value: number) => {
 		if (addresses?.length > 0) {
-			const address = addresses.find((address) => address.id == value);
+			const address = addresses.find((address) => address?.id == value);
 			setClaimUserPayload({
 				...claimUserPayload,
 				address: address?.address,
@@ -171,7 +171,7 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 							<Col xs={24} lg={8}>
 								<p>Address</p>
 
-								{addresses.length > 0 ? (
+								{addresses?.length > 0 ? (
 									<Select
 										style={{ minWidth: '100%' }}
 										defaultValue={
@@ -193,7 +193,7 @@ const ClaimUser = ({ userId }: { userId: number }) => {
 							</Col>
 							<Col xs={24} lg={8}>
 								<p>Team</p>
-								{teams.length > 0 ? (
+								{teams?.length > 0 ? (
 									<Select
 										style={{ minWidth: '100%' }}
 										onChange={handleTeamChange}
